@@ -1,0 +1,42 @@
+name: Release
+
+on:
+  push:
+    tags: [ '*.*.*' ]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: roblox/setup-foreman@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: "^1.0.5"
+
+      - name: List installed foreman tools
+        run: foreman list
+
+      - name: Build assets
+        run: |
+          rojo build default.project.json --output PluginToolkit.rbxmx
+          rojo build default.project.json --output PluginToolkit.rbxm
+
+      - name: Get release info
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+
+      - name: Create Github release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ steps.get_version.outputs.VERSION }}
+          fail_on_unmatched_files: true
+          files: |
+            PluginToolkit.rbxmx
+            PluginToolkit.rbxm
+          draft: true

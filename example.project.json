@@ -1,0 +1,15 @@
+{
+  "name": "plugin-toolkit-example",
+  "tree": {
+    "$path": "example",
+
+    "Packages": {
+      "$path": "Packages",
+
+      "PluginToolkit": {
+        "$path": "src"
+      }
+
+    }
+  }
+}

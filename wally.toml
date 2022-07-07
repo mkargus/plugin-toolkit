@@ -1,0 +1,12 @@
+[package]
+name = "mkargus/plugin-toolkit"
+version = "0.1.0"
+license = "MIT"
+authors = ["mkargus <https://mkargus.dev>"]
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+include = ["src", "src/**", "default.project.json", "wally.toml", "wally.lock"]
+exclude = ["*"]
+
+[dependencies]
+Roact = "roblox/roact@^1.4.2"
