@@ -25,7 +25,7 @@ function App:render()
         ClickableWhenViewportHidden = true,
         Active = state.Enabled,
         OnClick = function()
-          self:setState({ Enabled = not state.Enabled })
+          self:setState({ Enabled = not self.state.Enabled })
         end
       })
     }),
@@ -34,6 +34,7 @@ function App:render()
       Id = 'ExampleWidget',
       FloatingSize = Vector2.new(100, 100),
       MinimumSize = Vector2.new(200, 200),
+      OverridePreviousState = true,
 
       Enabled = state.Enabled,
 
