@@ -1,2 +1,1 @@
-local Roact = require(script.Parent.Parent.Roact)
-return Roact
+return require(script.Parent.Parent.Roact)

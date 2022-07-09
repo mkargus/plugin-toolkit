@@ -65,7 +65,6 @@ end
 
 return function(props)
   return Context.use(Context.Plugin)(function(plugin)
-
     return Roact.createElement(StudioWidget, Merge(props, {
       plugin = plugin
     }))

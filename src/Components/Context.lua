@@ -5,7 +5,7 @@ local function use(context)
     return Roact.createElement(context.Consumer, {
       render = function(value)
         return render(value)
-      end,
+      end
     })
   end
 end
