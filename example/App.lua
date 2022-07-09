@@ -41,6 +41,15 @@ function App:render()
       OnClose = function()
         self:setState({ Enabled = false })
       end
+    }),
+
+    Action = Roact.createElement(PluginToolkit.PluginAction, {
+      Id = 'Example Action',
+      Text = 'Example Action',
+
+      OnTriggered = function()
+        print('PluginAction Triggered.')
+      end
     })
 
   })
