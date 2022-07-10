@@ -35,9 +35,7 @@ function ToolbarButton:init()
 end
 
 function ToolbarButton:render()
-  return Roact.createElement(Context.ToolbarButton.Provider, {
-    value = self.button
-  })
+  return nil
 end
 
 function ToolbarButton:didUpdate(lastProps)
