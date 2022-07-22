@@ -44,9 +44,13 @@ function StudioWidget:init()
 end
 
 function StudioWidget:render()
-  return Roact.createElement(Roact.Portal, {
-    target = self.widget
-  }, self.props[Roact.Children])
+  return Roact.createElement(Context.Widget.Provider, {
+    value = self.widget
+  }, {
+    Roact.createElement(Roact.Portal, {
+      target = self.widget
+    }, self.props[Roact.Children])
+  })
 end
 
 function StudioWidget:didUpdate(lastProps)

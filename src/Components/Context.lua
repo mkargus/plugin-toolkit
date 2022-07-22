@@ -13,6 +13,7 @@ end
 return {
   Plugin = Roact.createContext(nil),
   Toolbar = Roact.createContext(nil),
+  Widget = Roact.createContext(nil),
 
   use = use
 }
