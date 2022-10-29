@@ -1,6 +1,6 @@
 local Roact = require(script.Parent.Parent.Roact)
 local Context = require(script.Parent.Context)
-local Merge = require(script.Parent.Parent.Util.Merge)
+local TableMerge = require(script.Parent.Util.TableMerge)
 
 local StudioWidget = Roact.Component:extend('StudioWidget')
 
@@ -69,7 +69,7 @@ end
 
 return function(props)
   return Context.use(Context.Plugin)(function(plugin)
-    return Roact.createElement(StudioWidget, Merge(props, {
+    return Roact.createElement(StudioWidget, TableMerge(props, {
       plugin = plugin
     }))
   end)

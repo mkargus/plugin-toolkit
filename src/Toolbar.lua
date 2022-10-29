@@ -1,6 +1,6 @@
 local Roact = require(script.Parent.Parent.Roact)
 local Context = require(script.Parent.Context)
-local Merge = require(script.Parent.Parent.Util.Merge)
+local TableMerge = require(script.Parent.Util.TableMerge)
 
 local PluginToolbar = Roact.Component:extend('PluginToolbar')
 
@@ -20,7 +20,7 @@ end
 
 return function(props)
   return Context.use(Context.Plugin)(function(plugin)
-    return Roact.createElement(PluginToolbar, Merge(props, {
+    return Roact.createElement(PluginToolbar, TableMerge(props, {
       plugin = plugin
     }))
   end)
