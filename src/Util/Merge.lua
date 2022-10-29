@@ -1,4 +1,4 @@
-return function (...: table?): table
+return function (...)
   local newTable = {}
 
   for _, dict in ipairs({...}) do
