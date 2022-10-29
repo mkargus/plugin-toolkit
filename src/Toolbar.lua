@@ -19,7 +19,7 @@ function PluginToolbar:willUnmount()
 end
 
 return function(props)
-  return Context.use(Context.Plugin)(function(plugin)
+  return Context.use(Context.Plugin, function(plugin)
     return Roact.createElement(PluginToolbar, TableMerge(props, {
       plugin = plugin
     }))

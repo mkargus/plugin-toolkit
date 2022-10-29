@@ -68,7 +68,7 @@ function StudioWidget:willUnmount()
 end
 
 return function(props)
-  return Context.use(Context.Plugin)(function(plugin)
+  return Context.use(Context.Plugin, function(plugin)
     return Roact.createElement(StudioWidget, TableMerge(props, {
       plugin = plugin
     }))

@@ -1,13 +1,11 @@
 local Roact = require(script.Parent.Parent.Roact)
 
-local function use(context)
-  return function(render)
-    return Roact.createElement(context.Consumer, {
-      render = function(value)
-        return render(value)
-      end
-    })
-  end
+local function use(context, render)
+  return Roact.createElement(context.Consumer, {
+    render = function(value)
+      return render(value)
+    end
+  })
 end
 
 return {

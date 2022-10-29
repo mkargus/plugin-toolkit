@@ -40,7 +40,7 @@ function PluginAction:willUnmount()
 end
 
 return function(props)
-  return Context.use(Context.Plugin)(function(plugin)
+  return Context.use(Context.Plugin, function(plugin)
     return Roact.createElement(PluginAction, TableMerge(props, {
       plugin = plugin
     }))

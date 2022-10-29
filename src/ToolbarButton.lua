@@ -53,7 +53,7 @@ function ToolbarButton:willUnmount()
 end
 
 return function(props)
-  return Context.use(Context.Toolbar)(function(toolbar)
+  return Context.use(Context.Toolbar, function(toolbar)
     return Roact.createElement(ToolbarButton, TableMerge(props, {
       toolbar = toolbar
     }))
