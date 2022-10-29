@@ -10,13 +10,9 @@ function App:init()
 end
 
 function App:render()
-  local props = self.props
   local state = self.state
 
-  return Roact.createElement(PluginToolkit.Plugin, {
-    plugin = props.plugin
-  }, {
-
+  return Roact.createFragment({
     Toolbar = Roact.createElement(PluginToolkit.Toolbar, {
       Name = 'Example',
     }, {

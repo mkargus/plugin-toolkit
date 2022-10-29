@@ -1,3 +1,5 @@
+local plugin = plugin or script:FindFirstAncestorWhichIsA('Plugin')
+
 local Roact = require(script.Parent.Parent.Roact)
 
 local function use(context, render)
@@ -9,7 +11,7 @@ local function use(context, render)
 end
 
 return {
-  Plugin = Roact.createContext(nil),
+  Plugin = Roact.createContext(plugin),
   Toolbar = Roact.createContext(nil),
   Widget = Roact.createContext(nil),
 
