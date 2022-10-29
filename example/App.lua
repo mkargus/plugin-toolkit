@@ -46,6 +46,35 @@ function App:render()
       OnTriggered = function()
         print('PluginAction Triggered.')
       end
+    }),
+
+    Menu = Roact.createElement(PluginToolkit.Menu, {
+      Id = 'TestMenu',
+      Enabled = state.Enabled,
+      OnClose = function(result)
+        if result then
+          print('Selected Action: ' ..result.ActionId)
+        end
+      end
+    }, {
+      Roact.createElement(PluginToolkit.MenuItem, {
+        Id = 'Test1',
+        Label = 'Test Label A',
+        OnTriggered = function()
+          print('Triggered')
+        end
+      }),
+      Roact.createElement(PluginToolkit.MenuItem, {
+        Separator = true
+      }),
+      Roact.createElement(PluginToolkit.MenuItem, {
+        Id = 'Test2',
+        Label = 'Test Label B',
+        Icon = 'rbxassetid://11257981829',
+        OnTriggered = function()
+          print('Triggered2')
+        end
+      }),
     })
 
   })

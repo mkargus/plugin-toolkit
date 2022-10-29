@@ -14,6 +14,7 @@ return {
   Plugin = Roact.createContext(plugin),
   Toolbar = Roact.createContext(nil),
   Widget = Roact.createContext(nil),
+  Menu = Roact.createContext(nil),
 
   use = use
 }
