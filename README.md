@@ -7,7 +7,7 @@
 Add PluginToolkit into `wally.toml`, then run `wally install`.
 ```toml
 [dependencies]
-PluginToolkit = "mkargus/plugin-toolkit@^0.1.0"
+PluginToolkit = "mkargus/plugin-toolkit@^0.2.0"
 ```
 
 ### Manual Installation
