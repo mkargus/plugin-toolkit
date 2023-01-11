@@ -1,10 +1,8 @@
-return function (...)
-  local newTable = {}
+return function (org, add)
+  local newTable = table.clone(org)
 
-  for _, dict in ipairs({...}) do
-    for key, value in pairs(dict) do
-      newTable[key] = value
-    end
+  for key, value in pairs(add) do
+    newTable[key] = value
   end
 
   return newTable
