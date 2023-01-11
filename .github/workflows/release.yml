@@ -28,7 +28,7 @@ jobs:
 
       - name: Get release info
         id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
       - name: Create Github release
         uses: softprops/action-gh-release@v1
