@@ -1,6 +1,7 @@
 local Roact = require(script.Parent.Parent.Roact)
 local Context = require(script.Parent.Context)
 local TableMerge = require(script.Parent.Util.TableMerge)
+local EventProp = require(script.Parent.Util.EventProp)
 
 local StudioWidget = Roact.Component:extend('StudioWidget')
 
@@ -30,12 +31,19 @@ function StudioWidget:init()
   widget.Title = props.Title or props.Id
   widget.ZIndexBehavior = props.ZIndexBehavior
 
+  for eventName, callback in EventProp.GetEvents(props) do
+    widget[eventName]:Connect(function(...)
+      callback(widget, ...)
+    end)
+  end
+
   widget:BindToClose(function()
     if props.OnClose then
       props.OnClose()
     end
   end)
 
+  -- ? Look into custom events (i.e. `Roact.Event.OnInit`)
   if props.OnInit then
     props.OnInit(widget.Enabled)
   end

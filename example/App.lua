@@ -36,6 +36,12 @@ function App:render()
 
       OnClose = function()
         self:setState({ Enabled = false })
+      end,
+      [Roact.Event.WindowFocused] = function()
+        print("I'm in focus :D")
+      end,
+      [Roact.Event.WindowFocusReleased] = function()
+        print("I'm not in focus :(")
       end
     }),
 
