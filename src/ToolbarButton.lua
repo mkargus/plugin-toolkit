@@ -34,6 +34,7 @@ function ToolbarButton:init()
 
   button.Click:Connect(function()
     if props.OnClick then
+      warn('OnClick is deprecated and will be removed. Replace OnClick with [Roact.Event.Click]')
       props.OnClick()
     end
   end)
