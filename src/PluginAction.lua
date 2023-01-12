@@ -1,6 +1,7 @@
 local Roact = require(script.Parent.Parent.Roact)
 local Context = require(script.Parent.Context)
 local TableMerge = require(script.Parent.Util.TableMerge)
+local EventProp = require(script.Parent.Util.EventProp)
 
 local PluginAction = Roact.Component:extend('PluginAction')
 
@@ -21,6 +22,12 @@ function PluginAction:init()
     props.Icon,
     props.AllowBinding
   )
+
+  for eventName, callback in EventProp.GetEvents(props) do
+    action[eventName]:Connect(function(...)
+      callback(action, ...)
+    end)
+  end
 
   action.Triggered:Connect(function()
     if props.OnTriggered then

@@ -1,6 +1,7 @@
 local Roact = require(script.Parent.Parent.Roact)
 local Context = require(script.Parent.Context)
 local TableMerge = require(script.Parent.Util.TableMerge)
+local EventProp = require(script.Parent.Util.EventProp)
 
 local ToolbarButton = Roact.Component:extend('ToolbarButton')
 
@@ -24,6 +25,12 @@ function ToolbarButton:init()
   button.ClickableWhenViewportHidden = props.ClickableWhenViewportHidden
   button.Enabled = props.Enabled
   button:SetActive(props.Active)
+
+  for eventName, callback in EventProp.GetEvents(props) do
+    button[eventName]:Connect(function(...)
+      callback(button, ...)
+    end)
+  end
 
   button.Click:Connect(function()
     if props.OnClick then
