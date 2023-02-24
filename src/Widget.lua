@@ -43,11 +43,6 @@ function StudioWidget:init()
     end
   end)
 
-  -- ? Look into custom events (i.e. `Roact.Event.OnInit`)
-  if props.OnInit then
-    props.OnInit(widget.Enabled)
-  end
-
   self.widget = widget
 end
 
@@ -59,6 +54,18 @@ function StudioWidget:render()
       target = self.widget
     }, self.props[Roact.Children])
   })
+end
+
+function StudioWidget:didMount()
+  -- ? Look into custom events (i.e. `Roact.Event.OnInit`)
+  if self.props.OnInit then
+    warn('OnInit is deprecated and will be removed. Replace OnInit with [Roact.Event.OnInit]')
+    self.props.OnInit(self.widget.Enabled)
+  end
+
+  if self.props[Roact.Event.OnInit] then
+    self.props[Roact.Event.OnInit](self.widget)
+  end
 end
 
 function StudioWidget:didUpdate(lastProps)
