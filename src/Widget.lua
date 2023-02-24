@@ -63,11 +63,6 @@ function StudioWidget:render()
 end
 
 function StudioWidget:didMount()
-  if self.props.OnInit then
-    warn('OnInit is deprecated and will be removed. Replace OnInit with [Roact.Event.OnInit]')
-    self.props.OnInit(self.widget.Enabled)
-  end
-
   if self.props[Roact.Event.OnInit] then
     self.props[Roact.Event.OnInit](self.widget)
   end

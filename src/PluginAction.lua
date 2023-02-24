@@ -29,13 +29,6 @@ function PluginAction:init()
     end)
   end
 
-  action.Triggered:Connect(function()
-    if props.OnTriggered then
-      warn('OnTriggered is deprecated and will be removed. Replace OnTriggered with [Roact.Event.Triggered]')
-      props.OnTriggered()
-    end
-  end)
-
   self.action = action
 end
 
