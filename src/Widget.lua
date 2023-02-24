@@ -3,6 +3,10 @@ local Context = require(script.Parent.Context)
 local TableMerge = require(script.Parent.Util.TableMerge)
 local EventProp = require(script.Parent.Util.EventProp)
 
+local CUSTOM_EVENTS = {
+  'OnInit'
+}
+
 local StudioWidget = Roact.Component:extend('StudioWidget')
 
 StudioWidget.defaultProps = {
@@ -32,9 +36,11 @@ function StudioWidget:init()
   widget.ZIndexBehavior = props.ZIndexBehavior
 
   for eventName, callback in EventProp.GetEvents(props) do
-    widget[eventName]:Connect(function(...)
-      callback(widget, ...)
-    end)
+    if not table.find(CUSTOM_EVENTS, eventName) then
+      widget[eventName]:Connect(function(...)
+        callback(widget, ...)
+      end)
+    end
   end
 
   widget:BindToClose(function()
@@ -57,7 +63,6 @@ function StudioWidget:render()
 end
 
 function StudioWidget:didMount()
-  -- ? Look into custom events (i.e. `Roact.Event.OnInit`)
   if self.props.OnInit then
     warn('OnInit is deprecated and will be removed. Replace OnInit with [Roact.Event.OnInit]')
     self.props.OnInit(self.widget.Enabled)
