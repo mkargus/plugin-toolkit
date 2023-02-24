@@ -47,6 +47,10 @@ function ToolbarButton:didUpdate(lastProps)
   if lastProps.Enabled ~= self.props.Enabled then
     self.button.Enabled = self.props.Enabled
   end
+
+  if lastProps.Icon ~= self.props.Icon then
+    self.button.Icon = self.props.Icon
+  end
 end
 
 function ToolbarButton:willUnmount()
