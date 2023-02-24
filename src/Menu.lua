@@ -1,6 +1,7 @@
 local Roact = require(script.Parent.Parent.Roact)
 local Context = require(script.Parent.Context)
 local TableMerge = require(script.Parent.Util.TableMerge)
+local EventProp = require(script.Parent.Util.EventProp)
 
 local Menu = Roact.Component:extend('Menu')
 
@@ -11,6 +12,7 @@ Menu.defaultProps = {
 function Menu:init()
   local props = self.props
   local menu = props.plugin:CreatePluginMenu(props.Id)
+  local events = EventProp.GetEvents(props)
 
   function self.openMenu()
     self.isOpen = true
@@ -18,8 +20,8 @@ function Menu:init()
       local result = menu:ShowAsync()
       self.isOpen = false
 
-      if props.OnClose then
-        props.OnClose(result)
+      if events.Triggered then
+        events.Triggered(result)
       end
     end)
 

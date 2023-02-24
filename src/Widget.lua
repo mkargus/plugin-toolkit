@@ -1,6 +1,11 @@
 local Roact = require(script.Parent.Parent.Roact)
 local Context = require(script.Parent.Context)
 local TableMerge = require(script.Parent.Util.TableMerge)
+local EventProp = require(script.Parent.Util.EventProp)
+
+local CUSTOM_EVENTS = {
+  'OnInit'
+}
 
 local StudioWidget = Roact.Component:extend('StudioWidget')
 
@@ -30,15 +35,19 @@ function StudioWidget:init()
   widget.Title = props.Title or props.Id
   widget.ZIndexBehavior = props.ZIndexBehavior
 
+  for eventName, callback in EventProp.GetEvents(props) do
+    if not table.find(CUSTOM_EVENTS, eventName) then
+      widget[eventName]:Connect(function(...)
+        callback(widget, ...)
+      end)
+    end
+  end
+
   widget:BindToClose(function()
     if props.OnClose then
       props.OnClose()
     end
   end)
-
-  if props.OnInit then
-    props.OnInit(widget.Enabled)
-  end
 
   self.widget = widget
 end
@@ -51,6 +60,12 @@ function StudioWidget:render()
       target = self.widget
     }, self.props[Roact.Children])
   })
+end
+
+function StudioWidget:didMount()
+  if self.props[Roact.Event.OnInit] then
+    self.props[Roact.Event.OnInit](self.widget)
+  end
 end
 
 function StudioWidget:didUpdate(lastProps)

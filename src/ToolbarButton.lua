@@ -1,6 +1,7 @@
 local Roact = require(script.Parent.Parent.Roact)
 local Context = require(script.Parent.Context)
 local TableMerge = require(script.Parent.Util.TableMerge)
+local EventProp = require(script.Parent.Util.EventProp)
 
 local ToolbarButton = Roact.Component:extend('ToolbarButton')
 
@@ -25,11 +26,11 @@ function ToolbarButton:init()
   button.Enabled = props.Enabled
   button:SetActive(props.Active)
 
-  button.Click:Connect(function()
-    if props.OnClick then
-      props.OnClick()
-    end
-  end)
+  for eventName, callback in EventProp.GetEvents(props) do
+    button[eventName]:Connect(function(...)
+      callback(button, ...)
+    end)
+  end
 
   self.button = button
 end

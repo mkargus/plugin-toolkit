@@ -20,7 +20,7 @@ function App:render()
         Id = 'Toggle Widget',
         ClickableWhenViewportHidden = true,
         Active = state.Enabled,
-        OnClick = function()
+        [Roact.Event.Click] = function()
           self:setState({ Enabled = not self.state.Enabled })
         end
       })
@@ -36,6 +36,16 @@ function App:render()
 
       OnClose = function()
         self:setState({ Enabled = false })
+      end,
+
+      [Roact.Event.OnInit] = function(widget)
+        print(widget.Name)
+      end,
+      [Roact.Event.WindowFocused] = function()
+        print("I'm in focus :D")
+      end,
+      [Roact.Event.WindowFocusReleased] = function()
+        print("I'm not in focus :(")
       end
     }),
 
@@ -43,7 +53,7 @@ function App:render()
       Id = 'Example Action',
       Text = 'Example Action',
 
-      OnTriggered = function()
+      [Roact.Event.Triggered] = function()
         print('PluginAction Triggered.')
       end
     }),
@@ -51,7 +61,7 @@ function App:render()
     Menu = Roact.createElement(PluginToolkit.Menu, {
       Id = 'TestMenu',
       Enabled = state.Enabled,
-      OnClose = function(result)
+      [Roact.Event.Triggered] = function(result)
         if result then
           print('Selected Action: ' ..result.ActionId)
         end
@@ -60,7 +70,7 @@ function App:render()
       Roact.createElement(PluginToolkit.MenuItem, {
         Id = 'Test1',
         Label = 'Test Label A',
-        OnTriggered = function()
+        [Roact.Event.Triggered] = function()
           print('Triggered')
         end
       }),
@@ -71,7 +81,7 @@ function App:render()
         Id = 'Test2',
         Label = 'Test Label B',
         Icon = 'rbxassetid://11257981829',
-        OnTriggered = function()
+        [Roact.Event.Triggered] = function()
           print('Triggered2')
         end
       }),
