@@ -20,7 +20,7 @@ function App:render()
         Id = 'Toggle Widget',
         ClickableWhenViewportHidden = true,
         Active = state.Enabled,
-        OnClick = function()
+        [Roact.Event.Click] = function()
           self:setState({ Enabled = not self.state.Enabled })
         end
       })
@@ -49,7 +49,7 @@ function App:render()
       Id = 'Example Action',
       Text = 'Example Action',
 
-      OnTriggered = function()
+      [Roact.Event.Triggered] = function()
         print('PluginAction Triggered.')
       end
     }),
@@ -57,7 +57,7 @@ function App:render()
     Menu = Roact.createElement(PluginToolkit.Menu, {
       Id = 'TestMenu',
       Enabled = state.Enabled,
-      OnClose = function(result)
+      [Roact.Event.Triggered] = function(result)
         if result then
           print('Selected Action: ' ..result.ActionId)
         end
