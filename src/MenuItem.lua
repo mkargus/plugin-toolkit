@@ -1,6 +1,7 @@
 local Roact = require(script.Parent.Parent.Roact)
 local Context = require(script.Parent.Context)
 local TableMerge = require(script.Parent.Util.TableMerge)
+local EventProp = require(script.Parent.Util.EventProp)
 
 local MenuItem = Roact.Component:extend('MenuItem')
 
@@ -10,6 +11,7 @@ MenuItem.defaultProps = {
 
 function MenuItem:createItem()
   local props = self.props
+  local events = EventProp.GetEvents(props)
   local menu = props.menu
   local item
 
@@ -18,8 +20,8 @@ function MenuItem:createItem()
   else
     item = menu:AddNewAction(props.Id, props.Label or props.Id, props.Icon)
     item.Triggered:Connect(function()
-      if props.OnTriggered then
-        props.OnTriggered()
+      if events.Triggered then
+        events.Triggered(item)
       end
     end)
   end

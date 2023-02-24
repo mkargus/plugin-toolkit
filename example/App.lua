@@ -70,7 +70,7 @@ function App:render()
       Roact.createElement(PluginToolkit.MenuItem, {
         Id = 'Test1',
         Label = 'Test Label A',
-        OnTriggered = function()
+        [Roact.Event.Triggered] = function()
           print('Triggered')
         end
       }),
@@ -81,7 +81,7 @@ function App:render()
         Id = 'Test2',
         Label = 'Test Label B',
         Icon = 'rbxassetid://11257981829',
-        OnTriggered = function()
+        [Roact.Event.Triggered] = function()
           print('Triggered2')
         end
       }),
